@@ -15,9 +15,10 @@ def Sweep( maxPower , maxSupply, horizScale, vertScale, stepValue, stepNumber, o
 	instlist = rm.list_resources()
 	for i in instlist:
 		tempinst = pyvisa.ResourceManager().open_resource(i)
-		if "ASRL" in i:
-			tempinst.write('IDN?')
-			print(tempinst.read_binary_values())
+		# This was a first attempt at dealing with non-responsive devices
+		#if "ASRL" in i:
+		#	tempinst.write('IDN?')
+		#	print(tempinst.read_binary_values())
 		if "GPIB" in i: #to be checked. Some ASRL internal instrument gave me problems so I needed this filter
 			if "371B" in tempinst.query('ID?'):
 				inst371B = tempinst
